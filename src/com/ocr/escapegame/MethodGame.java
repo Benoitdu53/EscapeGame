@@ -34,4 +34,9 @@ public class MethodGame {
             }while (!Ucombi);
             return userCombinaison;
         }
+
+        public static char comparerCombinaison(int userCombinaison){
+
+            return 0;
+        }
 }

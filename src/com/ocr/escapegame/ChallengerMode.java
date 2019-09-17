@@ -63,7 +63,9 @@ public class ChallengerMode {
             }
 
             MethodGame.saisirCombinaison();
-            System.out.println(MethodGame.saisirCombinaison());
+
+            int userCombinaison = MethodGame.saisirCombinaison();
+                MethodGame.comparerCombinaison(userCombinaison);
                 nP++;
             // TODO Comparaison du chiffre avec celui de l'Ia
         } while (nP <= 4);// nP n'est pas égale à 4 ou que la réponse à été trouvée
