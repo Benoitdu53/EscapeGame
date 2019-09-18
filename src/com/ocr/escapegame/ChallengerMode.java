@@ -11,6 +11,8 @@ public class ChallengerMode {
      * Déroulement du mode Challenger
      */
     public void runChallengerMode() {
+        int nP = 0;
+
         System.out.println("Vous avez choisi comme mode de jeu : Challenger");
         System.out.println("");
         System.out.println("Principe du jeu en mode Challenger :");
@@ -39,35 +41,46 @@ public class ChallengerMode {
 
 
          // Proposition de l'utilisateur
-        int nP = 0;
+        boolean Winner = false;
         do {
             if (nP == 0) {
                 System.out.println("Donner votre première proposition ");
-                System.out.println("");
             }
             else if (nP == 1) {
                 System.out.println("Donner votre deuxième proposition ");
-                System.out.println("");
             }
             else if (nP == 2) {
-                System.out.println("Donner votre deuxième proposition ");
-                System.out.println("");
+                System.out.println("Donner votre troisième proposition ");
             }
             else if (nP == 3) {
-                System.out.println("Donner votre troisième proposition ");
-                System.out.println("");
-            }
-            else if (nP == 4) {
                 System.out.println("Donner votre quatrième et dernière proposition ");
-                System.out.println("");
             }
 
+            // Confirmer la bonne saisie de l'utilisateur et la récupérer
             MethodGame.saisirCombinaison();
+            int[] userCombinaison = MethodGame.saisirCombinaison();
 
-            int userCombinaison = MethodGame.saisirCombinaison();
-                MethodGame.comparerCombinaison(userCombinaison);
+            // Faire la comparaison des deux combinaisons et retourner le résultat.
+                String[] ReponseFinal = MethodGame.comparerCombinaison(userCombinaison,IaCombinaison);
+                System.out.println("");
+                System.out.println("La réponse pour le 1er chiffre est "+ReponseFinal[0]);
+                System.out.println("La réponse pour le 2ème chiffre est "+ReponseFinal[1]);
+                System.out.println("La réponse pour le 3ème chiffre est "+ReponseFinal[2]);
+                System.out.println("La réponse pour le 4ème chiffre est "+ReponseFinal[3]);
+                System.out.println("");
+
+            // Si toutes les combinaisons sont égales à "=" alors la partie est gagné sinon retenté sa chance
+            if (ReponseFinal[0] == "=" && ReponseFinal[1] == "=" && ReponseFinal[2] == "=" && ReponseFinal[3] == "="){
+                Winner = true;
+                System.out.println("Bien joué");
+            }else {
                 nP++;
-            // TODO Comparaison du chiffre avec celui de l'Ia
-        } while (nP <= 4);// nP n'est pas égale à 4 ou que la réponse à été trouvée
+            }
+        } while (nP <= 3 || Winner == true);// nP n'est pas égale à 4 ou que la réponse à été trouvée
+            if (Winner){
+                System.out.println(" Félicitation, vous avez trouvé la combinaison !!!");
+            }else {
+                System.out.println(" Dommage... Vous n'avez pas réussi à trouver la combinaison.");
+            }
     }
 }
