@@ -1,17 +1,18 @@
 package com.ocr.escapegame;
 
 import java.util.Collection;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ChallengerMode {
-    Scanner sc = new Scanner(System.in);
-    MethodGame methodGame = new MethodGame();
 
     /**
      * Déroulement du mode Challenger
      */
     public void runChallengerMode() {
         int nP = 0;
+        boolean Winner;
+        int nProposition = nP + 1;
 
         System.out.println("Vous avez choisi comme mode de jeu : Challenger");
         System.out.println("");
@@ -24,7 +25,7 @@ public class ChallengerMode {
         System.out.println("Vous avez 4 chances ! Bon courage !!");
 
 
-         // L'Ia définit sa combinaison
+        // L'Ia définit sa combinaison
 
         System.out.println("");
         System.out.println("L'Intelligence artificielle définit aléatoirement une combinaison...");
@@ -33,6 +34,7 @@ public class ChallengerMode {
             int numCombi = (int) (Math.random() * 10);
             IaCombinaison[i] = numCombi;
         }
+        System.out.println("La combinaison secrète de l'intelligence artificielle est :");
         for (int j = 0; j < 4; j++) {
             System.out.print(IaCombinaison[j]);
         }
@@ -40,47 +42,96 @@ public class ChallengerMode {
         System.out.println("");
 
 
-         // Proposition de l'utilisateur
-        boolean Winner = false;
+        // Proposition de l'utilisateur
+
         do {
             if (nP == 0) {
                 System.out.println("Donner votre première proposition ");
-            }
-            else if (nP == 1) {
+            } else if (nP == 1) {
+                System.out.println("");
                 System.out.println("Donner votre deuxième proposition ");
-            }
-            else if (nP == 2) {
+            } else if (nP == 2) {
+                System.out.println("");
                 System.out.println("Donner votre troisième proposition ");
-            }
-            else if (nP == 3) {
+            } else if (nP == 3) {
+                System.out.println("");
                 System.out.println("Donner votre quatrième et dernière proposition ");
             }
 
-            // Confirmer la bonne saisie de l'utilisateur et la récupérer
-            MethodGame.saisirCombinaison();
+            // Saisie de l'utilisateur et la récupérer
             int[] userCombinaison = MethodGame.saisirCombinaison();
 
             // Faire la comparaison des deux combinaisons et retourner le résultat.
-                String[] ReponseFinal = MethodGame.comparerCombinaison(userCombinaison,IaCombinaison);
-                System.out.println("");
-                System.out.println("La réponse pour le 1er chiffre est "+ReponseFinal[0]);
-                System.out.println("La réponse pour le 2ème chiffre est "+ReponseFinal[1]);
-                System.out.println("La réponse pour le 3ème chiffre est "+ReponseFinal[2]);
-                System.out.println("La réponse pour le 4ème chiffre est "+ReponseFinal[3]);
-                System.out.println("");
+            int[] Combinaison2 = userCombinaison;
+            int[] Combinaison1 = IaCombinaison;
+
+            String[] ReponseFinal = MethodGame.comparerCombinaison(Combinaison1, Combinaison2);
+
+            // On affiche le résultat
+            System.out.println("");
+            System.out.println("Proposition : " + nProposition);
+            for (int a = 0; a <= 3; a++) {
+                System.out.print(userCombinaison[a]);
+            }
+            System.out.println("");
+            System.out.println("Résultat:");
+            for (int b = 0; b <= 3; b++) {
+                System.out.print(ReponseFinal[b] + " ");
+            }
+            System.out.println("");
 
             // Si toutes les combinaisons sont égales à "=" alors la partie est gagné sinon retenté sa chance
-            if (ReponseFinal[0] == "=" && ReponseFinal[1] == "=" && ReponseFinal[2] == "=" && ReponseFinal[3] == "="){
+            if (ReponseFinal[0].equals("=") && ReponseFinal[1].equals("=") && ReponseFinal[2].equals("=") && ReponseFinal[3].equals("=")) {
+                System.out.println("");
                 Winner = true;
-                System.out.println("Bien joué");
-            }else {
+            } else {
                 nP++;
+                Winner = false;
             }
-        } while (nP <= 3 || Winner == true);// nP n'est pas égale à 4 ou que la réponse à été trouvée
-            if (Winner){
-                System.out.println(" Félicitation, vous avez trouvé la combinaison !!!");
-            }else {
-                System.out.println(" Dommage... Vous n'avez pas réussi à trouver la combinaison.");
+        } while (!Winner && nP <= 3);
+        if (Winner) {
+            System.out.println(" Félicitation, vous avez trouvé la combinaison !!!");
+        } else {
+            System.out.println(" Dommage... Vous n'avez pas réussi à trouver la combinaison.");
+        }
+
+            System.out.println("");
+            /**
+             * Demander à l'utilisateur si il veut rejouer.
+             */
+            Scanner sc = new Scanner(System.in);
+            boolean reponseIsGood;
+            int choixMode = 0;
+            do{
+                System.out.println("Séléctionnez votre choix :");
+                System.out.println("1 - Rejouez au même mode");
+                System.out.println("2 - Changez de mode");
+                System.out.println("3 - Quitter le jeu");
+                do {
+                    try {
+                        choixMode = sc.nextInt();
+                        reponseIsGood = true;
+                        sc.nextLine();
+                    } catch (InputMismatchException e) {
+                        sc.next();
+                        System.out.println("Veuillez saisir un chiffre correspondant au choix souhaité");
+                        reponseIsGood = false;
+                    }
+                } while (!reponseIsGood);
+            } while (choixMode < 1 || choixMode > 3);
+            System.out.println("");
+            switch (choixMode) {
+                case 1:
+                    this.runChallengerMode();
+                    break;
+                case 2:
+                    GameMode.runGameMode();
+                    break;
+                case 3:
+                    System.out.println(" Vous avez choisi de quitter l'application.");
+                    System.out.println("");
+                    MethodGame.disconnect();
+                    break;
             }
     }
 }
