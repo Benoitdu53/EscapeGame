@@ -57,8 +57,8 @@ public class MethodGame {
 
     /**
      * Comparaison des deux combinaisons
-     * @param Combinaison1 combinaison de l'utilisateur
-     * @param Combinaison2 combinaison de l'ia
+     * @param Combinaison1 combinaison
+     * @param Combinaison2 combinaison
      * @return la réponse à l'utilisateur "-=-+"
      */
         public static String[] comparerCombinaison(int[] Combinaison1, int[] Combinaison2){

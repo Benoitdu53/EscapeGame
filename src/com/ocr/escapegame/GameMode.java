@@ -43,7 +43,8 @@ public class GameMode {
                     defenseurMode.runDefenseurMode();
                     break;
                     // Duel Mode
-                case 3 : System.out.println("Vous avez choisi comme mode de jeu : Duel");
+                case 3 : DuelMode duelMode = new DuelMode();
+                duelMode.runDuelMode();
                     break;
                     // Quitter l'application
                 case 4 :

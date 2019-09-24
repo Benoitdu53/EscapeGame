@@ -7,14 +7,22 @@ public class DefenseurMode {
 
     public void runDefenseurMode () {
         /*
-          Déroulement du mode Duel
+          Déroulement du mode Défenseur
          */
         boolean Combi;
         int nP=0;
         Scanner waitForKeypress = new Scanner ( System.in );
         System.out.println("Vous avez choisi comme mode de jeu : Défenseur");
         System.out.println("");
-        System.out.println("Saisissez une combinaison secrète à 4 chiffres de 0 à 9. Exemple : '1234'");
+        System.out.println("Principe du jeu en mode Défenseur :");
+        System.out.println("Vous devez choisir la combinaison à X chiffres et l'intelligence artificielle à 4 chances de la trouvée.");
+        System.out.println("A chaque proposition,");
+        System.out.println("\t si son chiffre est supérieur au chiffre à trouver alors '-' apparaîtra,");
+        System.out.println("\t si son chiffre est inférieur au chiffre à trouver alors '+' apparaîtra,");
+        System.out.println("\t si son chiffre est égale au chiffre à trouver alors '=' apparaîtra.");
+        System.out.println("Amusez vous bien !!");
+
+
         // L'utilisateur choisi une combinaison
         int[] userCombinaison = MethodGame.saisirCombinaison();
         System.out.print("Vous avez saisie la combinaison  : ");
@@ -49,7 +57,7 @@ public class DefenseurMode {
         System.out.println("");
         nP++;
 
-        // Sil dès la première comparaison les 2 combinaisons sont égales Combi=true
+        // Si dès la première comparaison les 2 combinaisons sont égales Combi=true
         if (ReponseFinal[0].equals("=") && ReponseFinal[1].equals("=") && ReponseFinal[2].equals("=") && ReponseFinal[3].equals("=")) {
             Combi = true;
         } else
