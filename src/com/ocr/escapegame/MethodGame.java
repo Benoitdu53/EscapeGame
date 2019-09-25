@@ -1,20 +1,24 @@
 package com.ocr.escapegame;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class MethodGame {
+    private static final Logger logger = LogManager.getLogger(MethodGame.class);
     /**
      * Saisie d'un nombre obligatoire
      * @return
      */
+
     public static int[] saisirCombinaison() {
         Scanner sc = new Scanner(System.in);
         int [] userCombinaison = new int[4];
         String pU;
         int p1,p2,p3,p4,pt;
-        boolean Ucombi = false;
+        boolean Ucombi;
 
         do {
             // On récupère la saisie Utilisateur
@@ -46,12 +50,14 @@ public class MethodGame {
                     Ucombi = false;
                 }
             } catch (NumberFormatException e) {
+                logger.error("Erreur de saisie : ");
                 System.out.println("Vous n'avez pas saisie un nombres à 4 chiffres");
                 Ucombi = false;
             }
 
         }while (!Ucombi);
 
+        logger.trace("Sortie méthode");
         return userCombinaison;
     }
 
