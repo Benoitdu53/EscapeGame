@@ -13,6 +13,13 @@ public class ChallengerMode {
         int nP = 0;
         boolean Winner;
         int nProposition = nP + 1;
+        char modeDev;
+        Scanner sc = new Scanner(System.in);
+
+        do{
+            System.out.println("Voulez-vous activer le mode développeur? (O/N)");
+            modeDev = sc.nextLine().charAt(0);
+        }while(modeDev != 'O' && modeDev != 'N');
 
         System.out.println("Vous avez choisi comme mode de jeu : Challenger");
         System.out.println("");
@@ -34,9 +41,13 @@ public class ChallengerMode {
             int numCombi = (int) (Math.random() * 10);
             IaCombinaison[i] = numCombi;
         }
-        System.out.println("La combinaison secrète de l'intelligence artificielle est :");
-        for (int j = 0; j < 4; j++) {
-            System.out.print(IaCombinaison[j]);
+        // Si le mode développeur est activé on affiche la combinaison de l'Ia
+        if (modeDev =='O') {
+            System.out.println("!! Mode développeur activé !!");
+            System.out.println("La combinaison secrète de l'intelligence artificielle est :");
+            for (int j = 0; j < 4; j++) {
+                System.out.print(IaCombinaison[j]);
+            }
         }
         System.out.println("");
         System.out.println("");
@@ -99,7 +110,6 @@ public class ChallengerMode {
             /**
              * Demander à l'utilisateur si il veut rejouer.
              */
-            Scanner sc = new Scanner(System.in);
             boolean reponseIsGood;
             int choixMode = 0;
             do{

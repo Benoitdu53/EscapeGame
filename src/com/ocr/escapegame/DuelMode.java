@@ -9,22 +9,33 @@ public class DuelMode {
         /*
         Déroulement du mode Duel
          */
+        Scanner sc = new Scanner(System.in);
+        char modeDev;
         Scanner waitForKeypress = new Scanner ( System.in );
+
+        // On demande si on active le mode développeur
+        do{
+            System.out.println("Voulez-vous activer le mode développeur? (O/N)");
+            modeDev = sc.nextLine().charAt(0);
+        }while(modeDev != 'O' && modeDev != 'N');
 
         System.out.println("Vous avez choisi comme mode de jeu : Duel");
         System.out.println("");
         System.out.println("Choississez une combinaison secrète et l'intelligence artificielle en fait de même.");
         System.out.println("");
-        System.out.println("Principe du jeu en mode Challenger :");
-        System.out.println("A tour de rôle, vous essayer de trouver la combinaison de l'Inteligence artificielle essaye à son tour.");
+        System.out.println("Principe du jeu en mode Duel :");
+        System.out.println("A tour de rôle, vous essayer de trouver la combinaison de l'Intelligence artificielle essaye à son tour.");
         System.out.println("A chaque proposition,");
         System.out.println("\t si votre chiffre est supérieur au chiffre à trouver alors '-' apparaîtra,");
         System.out.println("\t si votre chiffre est inférieur au chiffre à trouver alors '+' apparaîtra,");
         System.out.println("\t si votre chiffre est égale au chiffre à trouver alors '=' apparaîtra.");
         System.out.println("Le premier à trouver la combinaison de l'autre à gagné !");
         System.out.println("Bonne chance !");
+        System.out.println("");
+
 
         // L'utilisateur saisie sa combinaison secrète
+        System.out.println("Saisissez votre combinaison secrète à 4 chiffres. Exemple : 1234");
         int[] userCombinaison = MethodGame.saisirCombinaison();
         System.out.println("Votre combinaison secrète est :");
         for (int a = 0; a <= 3; a++) {
@@ -41,9 +52,13 @@ public class DuelMode {
             IaCombinaison[i] = numCombi;
         }
 
-        System.out.println("La combinaison secrète de l'intelligence artificielle est :");
-        for (int j = 0; j < 4; j++) {
-            System.out.print(IaCombinaison[j]);
+        // Si on active le mode développeur, on affiche la combinaison de l'Ia
+        if (modeDev =='O') {
+            System.out.println("!! Mode développeur activé !!");
+            System.out.println("La combinaison secrète de l'intelligence artificielle est :");
+            for (int j = 0; j < 4; j++) {
+                System.out.print(IaCombinaison[j]);
+            }
         }
         System.out.println("");
         System.out.println("");
@@ -130,7 +145,6 @@ public class DuelMode {
         /**
          * Demander à l'utilisateur si il veut rejouer.
          */
-        Scanner sc = new Scanner(System.in);
         boolean reponseIsGood;
         int choixMode = 0;
         do{
