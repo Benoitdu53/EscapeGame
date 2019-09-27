@@ -76,7 +76,7 @@ public class ChallengerMode {
             int[] Combinaison2 = userCombinaison;
             int[] Combinaison1 = IaCombinaison;
 
-            String[] ReponseFinal = MethodGame.comparerCombinaison(Combinaison1, Combinaison2);
+            String[] ReponseFinal = MethodGame.comparerCombinaisonIaUser(Combinaison1, Combinaison2);
 
             // On affiche le résultat
             System.out.println("");

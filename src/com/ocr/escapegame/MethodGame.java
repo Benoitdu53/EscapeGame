@@ -3,7 +3,6 @@ package com.ocr.escapegame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class MethodGame {
@@ -50,7 +49,6 @@ public class MethodGame {
                     Ucombi = false;
                 }
             } catch (NumberFormatException e) {
-                logger.error("Erreur de saisie : ");
                 System.out.println("Vous n'avez pas saisie un nombres à 4 chiffres");
                 Ucombi = false;
             }
@@ -63,22 +61,22 @@ public class MethodGame {
 
     /**
      * Comparaison des deux combinaisons
-     * @param Combinaison1 combinaison
-     * @param Combinaison2 combinaison
+     * @param IaCombinaison combinaison Ia
+     * @param propositionUser combinaison User
      * @return la réponse à l'utilisateur "-=-+"
      */
-        public static String[] comparerCombinaison(int[] Combinaison1, int[] Combinaison2){
+        public static String[] comparerCombinaisonIaUser(int[] propositionUser, int[] IaCombinaison){
                 char [] userReponse = new char[4];
                 String [] reponse = new String[4];
 
                     for ( int m =0; m <4 ; m++){
 
-                        if (Combinaison1[m] == Combinaison2[m]) {
+                        if (IaCombinaison[m] == propositionUser[m]) {
                             userReponse[m] = '=';
-                        } else if (Combinaison1[m] < Combinaison2[m]){
+                        } else if (IaCombinaison[m] < propositionUser[m]){
                             userReponse [m] = '-';
                         }
-                        else if (Combinaison1[m] > Combinaison2[m]){
+                        else if (IaCombinaison[m] > propositionUser[m]){
                             userReponse [m] = '+';
                         }
                         reponse [m] = Character.toString(userReponse[m]);
@@ -87,26 +85,27 @@ public class MethodGame {
         }
 
     /**
-     * Nouvelle saisie de l'intelligence artificielle selon le résultat donnée d'une précédente comparaison
-     * @param Combinaison1 Saisie User
-     * @param Combinaison2 Saisie Ia
+     * Comparaison de l'Ia sur la combinaison de l'user
+     *      * @param userCombinaison combinaison de l'user
+     *      * @param newSaisie combinaison Ia
+     *      * @return la réponse à l'utilisateur "-=-+"
      */
+    public static String[] comparerCombinaisonUserIa(int[] userCombinaison, int[] newSaisieIa){
+        char [] userReponse = new char[4];
+        String [] reponse = new String[4];
 
-    public static int[] newSaisieIa(int[] Combinaison1, int[] Combinaison2){
-        int[] newSaisieIa = new int[4];
-        Random random =new Random();
-
-        // Boucle pour générer un nouveau tableau de saisie Ia en tenant compte des résultats précédent
-        for (int b=0 ; b<4; b++){
-            if (Combinaison2[b] < Combinaison1[b]){
-                newSaisieIa[b] = Combinaison2[b]+random.nextInt(10 - Combinaison2[b]);
-            } else if (Combinaison2[b] > Combinaison1[b]){
-                newSaisieIa[b] = 0+random.nextInt(Combinaison2[b] - 0);
-            }else if (Combinaison2[b] == Combinaison1[b]){
-                newSaisieIa[b] = Combinaison2[b];
+        for ( int m =0; m <4 ; m++){
+            if (userCombinaison[m] == newSaisieIa[m]) {
+                userReponse[m] = '=';
+            } else if (userCombinaison[m] < newSaisieIa[m]){
+                userReponse [m] = '-';
             }
+            else if (userCombinaison[m] > newSaisieIa[m]){
+                userReponse [m] = '+';
+            }
+            reponse [m] = Character.toString(userReponse[m]);
         }
-        return newSaisieIa;
+        return reponse;
     }
 
     /**

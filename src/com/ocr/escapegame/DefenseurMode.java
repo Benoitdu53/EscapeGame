@@ -9,8 +9,12 @@ public class DefenseurMode {
         /*
           Déroulement du mode Défenseur
          */
-        boolean Combi;
-        int nP=0;
+        boolean IaWinner;
+        int numProposition=0;
+        int[] a = new int [4];
+        int[] b = new int [4];
+        int [] newSaisieIa = new int[4];
+
         Scanner waitForKeypress = new Scanner ( System.in );
         System.out.println("Vous avez choisi comme mode de jeu : Défenseur");
         System.out.println("");
@@ -23,7 +27,8 @@ public class DefenseurMode {
         System.out.println("Amusez vous bien !!");
 
 
-        // L'utilisateur choisi une combinaison
+        // L'utilisateur choisit une combinaison
+        System.out.println("Saisissez votre combinaison secrète à 4 chiffres. Exemple : 1234");
         int[] userCombinaison = MethodGame.saisirCombinaison();
         System.out.print("Vous avez saisie la combinaison  : ");
         for (int i = 0; i < 4; i++) {
@@ -31,79 +36,60 @@ public class DefenseurMode {
         }
         System.out.println("");
 
-        // L'intelligence Artificielle saisie une combinaison
-        int[] IaCombinaison = new int[4];
-        for (int i = 0; i < 4; i++) {
-            int numCombi = (int) (Math.random() * 10);
-            IaCombinaison[i] = numCombi;
-        }
+        do {
+            numProposition++;
+            // Si c'est la première proposition de l'Ia
+            if (numProposition == 1) {
+                for (int i = 0; i < 4; i++) {
+                    a[i] = 0;
+                    b[i] = 10;
+                }
+            }
 
-        // On compare les saisies des 2 combinaisons
-        int[] Combinaison2 = IaCombinaison;
-        int[] Combinaison1 = userCombinaison;
-        String[] ReponseFinal = MethodGame.comparerCombinaison(Combinaison1, Combinaison2);
+            // Nouvelle saisie de l'Ia
+            for (int c=0 ; c<4; c++){
+                if (newSaisieIa[c] < userCombinaison[c]){
+                    a[c] = newSaisieIa[c];
+                    newSaisieIa [c] = (a[c] + b[c])/2;
+                } else if (newSaisieIa[c] > userCombinaison[c]){
+                    b[c] = newSaisieIa[c];
+                    newSaisieIa [c] = (a[c] + b[c])/2;
+                }
+            }
 
-        // On affiche le résultat de la première comparaison
-        System.out.println("");
-        System.out.println("Proposition N° : 1");
-        for (int a = 0; a <= 3; a++) {
-            System.out.print(Combinaison2[a]);
-        }
-        System.out.println("");
-        System.out.println("Résultat:");
-        for (int b = 0; b <= 3; b++) {
-            System.out.print(ReponseFinal[b] + " ");
-        }
-        System.out.println("");
-        nP++;
-
-        // Si dès la première comparaison les 2 combinaisons sont égales Combi=true
-        if (ReponseFinal[0].equals("=") && ReponseFinal[1].equals("=") && ReponseFinal[2].equals("=") && ReponseFinal[3].equals("=")) {
-            Combi = true;
-        } else
-            Combi = false;
-
-        System.out . print (" Appuyez sur la touche Entrée pour continuer " ) ;
-        waitForKeypress.nextLine ();
-
-        //Chercher une nouvelle saisie selon le retour de la comparaison précédente
-        // Tant que la combinaison ou que l'intelligence artificielle à utiliser ses 4 chances
-        while (!Combi && nP<=3) {
-            int nProposition =nP+1;
-            int[] newSaisieIa = MethodGame.newSaisieIa(Combinaison1, Combinaison2);
-            Combinaison2 = newSaisieIa;
-            String[] ReponseNewSaisie = MethodGame.comparerCombinaison(Combinaison1, Combinaison2);
+            String[] ReponseNewSaisie = MethodGame.comparerCombinaisonUserIa(userCombinaison, newSaisieIa);
 
             // On affiche le résultat
             System.out.println("");
-            System.out.println("Proposition N° : "+nProposition);
-            for (int a = 0; a <= 3; a++) {
-                System.out.print(newSaisieIa[a]);
+            System.out.println("Proposition N° : "+numProposition+" de l'Ia");
+            for (int f = 0; f <= 3; f++) {
+                System.out.print(newSaisieIa[f]);
             }
             System.out.println("");
             System.out.println("Résultat :");
-            for (int b = 0; b <= 3; b++) {
-                System.out.print(ReponseNewSaisie[b] + " ");
+            for (int g = 0; g <= 3; g++) {
+                System.out.print(ReponseNewSaisie[g] + " ");
             }
             System.out.println("");
-            nP++;
-
-            System.out . print (" Appuyez sur la touche Entrée pour continuer " );
-            waitForKeypress.nextLine ();
 
             if (ReponseNewSaisie[0].equals("=") && ReponseNewSaisie[1].equals("=") && ReponseNewSaisie[2].equals("=") && ReponseNewSaisie[3].equals("=")) {
-                Combi = true;
-            } else
-                Combi = false;
-        }
-        if (Combi){
-            System.out.println("");
-            System.out.println(" Dommage, l'intelligence artificielle à trouve votre combinaison");
-        }else
-            System.out.println("");
-            System.out.println(" Félicitation, l'intelligence artificielle n'a pas trouvée votre combinaison !!!");
+                IaWinner = true;
+            } else {
+                IaWinner = false;
+            }
 
-        System.out.println("");
+            // L'utilisateur appuie sur Entrer pour continuer
+            System.out . print (" Appuyez sur la touche Entrée pour continuer " ) ;
+            waitForKeypress.nextLine ();
+
+        }while(!IaWinner && numProposition<=3);
+        System.out.println("Séléctionnez votre choix :");
+        if (IaWinner){
+            System.out.println("Dommage, l'intelligence artificielle a trouvée votre combinaison au bout de "+numProposition+" proposition(s).");
+        } else {
+            System.out.println(" Bravo l'intelligence artificielle n'a pas trouvée votre combinaison !");
+        }
+
         /**
          * Demander à l'utilisateur si il veut rejouer.
          */
