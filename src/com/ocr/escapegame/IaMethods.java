@@ -27,7 +27,8 @@ public class IaMethods implements IfDefenseur, IfAttaquant {
 
     // Affiche le résultat suite à une comparaison
     @Override
-    public void results( int [] res) {
+    public void AffResults(int nbMode) {
+        System.out.println("Dommage");
 
     }
 }
