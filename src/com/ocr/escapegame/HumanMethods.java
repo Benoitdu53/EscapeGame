@@ -54,14 +54,15 @@ public class HumanMethods implements IfDefenseur, IfAttaquant {
     public int[] propositionCombinaison() {
         int[] userProposition;
 
+        System.out.println("Veuillez saisir une combinaison à 4 chiffres ");
         userProposition = this.generateCombinaison();
+
         return userProposition;
     }
 
-    // Affiche le résultat suite à une comparaison
     @Override
-    public void results(int [] res) {
-
+    public void AffResults(int nbMode) {
+        System.out.println("Bravo");
     }
 
 }

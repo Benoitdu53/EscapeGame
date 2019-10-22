@@ -29,6 +29,9 @@ public class CommonMethods {
         System.out.println("\t si son chiffre est inférieur au chiffre à trouver alors '+' apparaîtra,");
         System.out.println("\t si son chiffre est égale au chiffre à trouver alors '=' apparaîtra.");
         System.out.println("Amusez vous bien !!");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("Veuillez générez une combinaison à 4 chiffres ");
     }
     //Affiche les règles du mode Duel
     public static void afficheRulesDuelMode(){
@@ -48,21 +51,22 @@ public class CommonMethods {
     }
 
     // Comparer les 2 combinaisons
-    public static char[] compare(int[] generateCombi, int[] propositionCombi) {
-        char [] userReponse = new char[4];
+    public static String compare(int[] generateCombi, int[] propositionCombi) {
+        char [] Reponse = new char[4];
+        String Results ="";
 
         for ( int m =0; m <4 ; m++){
             if (generateCombi[m] == propositionCombi[m]){
-                userReponse[m] = '=';
+                Results += '=';
             } else if (generateCombi[m] < propositionCombi[m]){
-                userReponse[m] = '-';
+                Results += '-';
             }
             else if (generateCombi[m] > propositionCombi[m]){
-                userReponse[m] = '+';
+                Results += '+';
             }
         }
 
-        return userReponse;
+        return Results;
     }
 
     //Afficher le choix du joueur après la partie
