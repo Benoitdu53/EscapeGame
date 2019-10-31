@@ -27,6 +27,8 @@ public class GameMode {
     private String att;
     private String def;
 
+    private boolean modeDev =false;
+
     public void runGameMode() {
         Scanner sc = new Scanner(System.in);
         boolean reponseIsGood;
@@ -49,6 +51,7 @@ public class GameMode {
                 System.out.println("4 - Quitter");
                 System.out.println("Quel mode de jeu choisissez-vous ?");
 
+                    // Saisie du mode de jeu
                     do {
                             try {
                                 nbMode = sc.nextInt();
@@ -64,8 +67,8 @@ public class GameMode {
 
                 switch (nbMode) {
 
-                    case 1: // Mode Challenger                          // Affiche les règles du mode Challengeur
-                        CommonMethods.afficheRulesChallengerMode();
+                    case 1: // Mode Challenger
+                        CommonMethods.afficheRulesChallengerMode();     // Affiche les règles du mode Challengeur
                         attaquant = new HumanMethods();
                         defenseur = new IaMethods();
                         att = "L'utilisateur";                          // L'attanquant est l'utilisateur
@@ -97,8 +100,7 @@ public class GameMode {
                 }
             } while (nbMode < 1 || nbMode > 4);
     }
-
-
+    
     /**
      * Mode Challenger et Défenseur
      */
@@ -113,7 +115,7 @@ public class GameMode {
             attaquant.recupererReponse(combinaison);                            // Récupérer la combinaison générer par le défenseur
             attaquant.recupererResults(proposition);                            // Récupérer la dernière proposition donner par l'attanquant
             proposition = attaquant.propositionCombinaison(nP);                 // Nouvelle proposition avec le nombre de proposition en paramètre
-            String res = CommonMethods.compare(combinaison, proposition);
+            String res = CommonMethods.compare(combinaison, proposition);       // Comparer les 2 combinaisons
             System.out.print("Proposition :" );
             for (int a=0; a <=3; a++) {
                 System.out.print(proposition[a]);

@@ -4,14 +4,19 @@ import java.util.Scanner;
 
 public class HumanMethods implements IfDefenseur, IfAttaquant {
     Scanner sc = new Scanner(System.in);
+    private int[] derProposition = new int[4];          // Tableau de la dernière proposition
+    int[] combinaison = new int[4];                     // Tableau de la combinaison générée par le défenseur
 
-    // L'humain génère une combinaison en tant que défenseur
+    /**
+     * L'humain génère une combinaison en tant que défenseur
+     * @return la combinaison générée
+     */
     @Override
     public int[] generateCombinaison() {
-        int p1, p2, p3, p4, pt;
-        String pU;
-        boolean Ucombi;
-        int[] userCombinaison = new int[4];
+        int p1, p2, p3, p4, pt;                         // Variables pour récupérer les chiffres 1 par 1
+        String pU;                                      // Saisie utilisateur
+        boolean Ucombi;                                 // Pour valider la bonne saisie de l'utilisateur
+        int[] userCombinaison = new int[4];             // Tableau de la combinaison générée ou proposé
 
         do {
             try {
@@ -49,20 +54,52 @@ public class HumanMethods implements IfDefenseur, IfAttaquant {
         return userCombinaison;
     }
 
-    // Proposition de l'humain en tant qu'attanquant
+    /**
+     * Proposition de l'humain en tant qu'attanquant
+     * @param nP Nombres de proposition ( Pas utilisé )
+     * @return la proposition de l'utilisateur
+     */
     @Override
-    public int[] propositionCombinaison() {
+    public int[] propositionCombinaison(int nP) {
         int[] userProposition;
 
         System.out.println("Veuillez saisir une combinaison à 4 chiffres ");
+
+        switch (nP){
+            case 0 : System.out.println("Saississez votre première proposition");
+                break;
+            case 1 : System.out.println("Saississez votre deuxième proposition");
+                break;
+            case 2 : System.out.println("Saississez votre troisème proposition");
+                break;
+            case 3 : System.out.println("Saississez votre quatrième proposition");
+                break;
+        }
         userProposition = this.generateCombinaison();
 
         return userProposition;
     }
 
+    /**
+     * On récupère la dernière proposition de l'utilisateur
+     * @param proposition Dernière proposition
+     * @return la dernière proposition
+     */
     @Override
-    public void AffResults(int nbMode) {
-        System.out.println("Bravo");
+    public int[] recupererResults(int[] proposition) {
+        this.derProposition = proposition;
+        return derProposition;
+    }
+
+    /**
+     * On récupère la combinaison générer par l'ia pour proposer une combinaison
+     * @param combinaison Combinaison générée du défenseur
+     * @return Combinaison générée du défenseur
+     */
+    @Override
+    public int[] recupererReponse(int[] combinaison) {
+        this.combinaison = combinaison;
+        return combinaison;
     }
 
 }
