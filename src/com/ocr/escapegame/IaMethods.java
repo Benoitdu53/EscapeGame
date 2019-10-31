@@ -9,10 +9,10 @@ public class IaMethods implements IfDefenseur, IfAttaquant {
     private static final Logger logger = LogManager.getLogger(IaMethods.class);
     Scanner waitForKeypress = new Scanner ( System.in );
 
-    int[] iaCombinaison = new int[4];           // Tableau de la nouvelle combinaison
-    int[] derProposition = new int[4];          // Tableau de la dernière combinaison
-    int[] combinaison = new int[4];             // Tableau de la combinaison du défenseur
-    int[] a = new int [4];                      // Tableau de l'intervalle inférieur
+    int[] iaCombinaison = new int[GameProperties.NOMBRE_CHIFFRES];           // Tableau de la nouvelle combinaison
+    int[] derProposition = new int[GameProperties.NOMBRE_CHIFFRES];          // Tableau de la dernière combinaison
+    int[] combinaison = new int[GameProperties.NOMBRE_CHIFFRES];             // Tableau de la combinaison du défenseur
+    int[] a = new int [GameProperties.NOMBRE_CHIFFRES];                      // Tableau de l'intervalle inférieur
     int[] b = {10,10,10,10};                    // Tableau de l'intervalle supérieur
 
     /**
@@ -62,7 +62,7 @@ public class IaMethods implements IfDefenseur, IfAttaquant {
                 }
             }
         }
-        return iaCombinaison;  // On retourne la combinaison proposer par l'ia
+        return iaCombinaison;       // On retourne la combinaison proposer par l'ia
     }
 
     /**
