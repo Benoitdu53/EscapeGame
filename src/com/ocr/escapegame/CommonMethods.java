@@ -110,6 +110,7 @@ public class CommonMethods {
      */
     public static void disconnect() {
         System.out.println(" Au revoir et à bientôt !");
+        System.out.println("");
         System.exit(0);
     }
 }

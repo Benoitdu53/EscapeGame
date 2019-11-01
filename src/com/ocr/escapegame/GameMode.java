@@ -3,6 +3,7 @@ package com.ocr.escapegame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -30,6 +31,9 @@ public class GameMode {
     private boolean modeDev =false;
 
     public void runGameMode() {
+        if (modeDev){
+            System.out.println("Mode dev");
+        }
         Scanner sc = new Scanner(System.in);
         boolean reponseIsGood;
 
@@ -106,6 +110,13 @@ public class GameMode {
      */
     public void Game() {
         int[] combinaison = defenseur.generateCombinaison();        // On récupère la combinaison généré par le défenseur
+
+        if (GameProperties.MODE_DEV){                               // On active le mode dev si modeDev = true
+            System.out.println(" Mode développeur activé ");        // Du coup on affiche la combinaison du défenseur
+            System.out.println(Arrays.toString(combinaison));
+            System.out.println("");
+        }
+
         boolean winner = false;                                     // Combinaison trouvée
         int nP = 0;                                                 // Nombre de proposition
         int[] proposition = new int [4];                            // Tableau de la proposition faite par l'attaquant
@@ -129,7 +140,7 @@ public class GameMode {
             if ("====".equals(res)) {
                 winner = true;
             }
-        }while (!winner && nP <= 3);
+        }while (!winner && nP < GameProperties.NOMBRE_ESSAIE);
 
         /**
          * Partie terminée, on affiche si la combinaison à été trouvé et qui est le vainqueur.
@@ -157,7 +168,15 @@ public class GameMode {
         System.out.println("Veuillez générez une combinaison à 4 chiffres ");
         int[] combinaison1 = defenseur1.generateCombinaison();                      // Récupération de la combinaison générée par l'utilisateur
         int[] combinaison2 = defenseur2.generateCombinaison();                      // Récupération de la combinaison générée par l'ia
-        boolean humanWinner = false;                   // Si l'utilisateur à trouvé la combinaison
+
+        if (GameProperties.MODE_DEV) {                                      // On active le mode dev si modeDev =true
+            System.out.println(" Mode développeur activé ");                // Du coup on affiche la combinaison des défenseurs
+            System.out.println(Arrays.toString(combinaison1));
+            System.out.println(Arrays.toString(combinaison2));
+            System.out.println("");
+        }
+
+            boolean humanWinner = false;                   // Si l'utilisateur à trouvé la combinaison
         boolean iaWinner = false;                      // Si l'ia à trouvée la combinaison
         int nP = 0;                                    // Nombre de propositions
         int[] proposition1 = new int [4];              // Tableau de proposition de l'utilisateur
