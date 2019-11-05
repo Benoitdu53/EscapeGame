@@ -64,6 +64,7 @@ public class GameMode {
                             } catch (InputMismatchException e) {
                                 sc.next();
                                 System.out.println("Veuillez saisir un chiffre correspondant au mode de jeu souhaité");
+                                logger.info("L'utilisateur n'a pas saisie un chiffre.");
                                 reponseIsGood = false;
                             }
                     } while (!reponseIsGood);
@@ -183,7 +184,6 @@ public class GameMode {
         int[] proposition2 = new int [4];              // Tableau de proposition de l'ia
 
         do {
-            nP++;
             attaquant1.recupererReponse(combinaison2);          // On récupère la combinaison générée de l'ia
             attaquant1.recupererResults(proposition1);          // On récupère la propostion de l'utilisateur
             attaquant2.recupererReponse(combinaison1);          // On récupère la combinaison générée de l'utilisateur
@@ -200,6 +200,7 @@ public class GameMode {
                 }
             System.out.println(" -> Résultat : " + res1);
             System.out.println("");
+            nP++;
 
             // Si l'utilisateur trouve la réponse alors il gagne sinon l'ia propose une combinaison
                 if ("====".equals(res1)) {
