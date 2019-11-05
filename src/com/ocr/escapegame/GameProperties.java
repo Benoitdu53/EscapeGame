@@ -1,10 +1,15 @@
 package com.ocr.escapegame;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class GameProperties {
+
+    private static final Logger logger = LogManager.getLogger(GameProperties.class);
 
         public static final int NOMBRE_CHIFFRES;
         public static final int NOMBRE_ESSAIE;
@@ -32,6 +37,7 @@ public class GameProperties {
 
             } catch (final IOException ex) {
                 ex.printStackTrace();
+                logger.info("Ne trouve pas le fichier de config");
             } finally {
                 if (input != null) {
                     try {

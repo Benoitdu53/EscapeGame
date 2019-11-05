@@ -97,6 +97,7 @@ public class CommonMethods {
                 } catch (InputMismatchException e) {
                     sc.next();
                     System.out.println("Veuillez saisir un chiffre correspondant au choix souhaité");
+                    logger.info("L'utilisateur n'a pas saisie un chiffre.");
                     reponseIsGood = false;
                 }
             } while (!reponseIsGood);

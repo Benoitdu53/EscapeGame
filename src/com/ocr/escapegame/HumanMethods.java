@@ -1,9 +1,14 @@
 package com.ocr.escapegame;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Scanner;
 
 public class HumanMethods implements IfDefenseur, IfAttaquant {
+    private static final Logger logger = LogManager.getLogger(HumanMethods.class);
     Scanner sc = new Scanner(System.in);
+
     private int[] derProposition = new int[4];          // Tableau de la dernière proposition
     int[] combinaison = new int[4];                     // Tableau de la combinaison générée par le défenseur
 
@@ -48,6 +53,7 @@ public class HumanMethods implements IfDefenseur, IfAttaquant {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Vous n'avez pas saisie un nombres à 4 chiffres");
+                logger.info("L'utilisateur a mal saisie sa combinaison.");
                 Ucombi = false;
             }
         }while (!Ucombi);
