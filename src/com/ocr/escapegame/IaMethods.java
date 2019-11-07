@@ -23,21 +23,13 @@ public class IaMethods implements IfDefenseur, IfAttaquant {
     @Override
     public int[] propositionCombinaison(int nP) {
 
-        int nombreProposition =nP+1;
-
         System.out . print (" Appuyez sur la touche Entrée pour continuer " ) ;
         waitForKeypress.nextLine ();
-        System.out.println("Ia proposition numéro : "+nombreProposition);
-
-        if (nombreProposition == GameProperties.NOMBRE_ESSAIE){
-            System.out.println("!! Dernière proposition !! ");
-        }
-
-        for (int a=0;a<GameProperties.NOMBRE_CHIFFRES; a++){
-            b[a]=10;
-        }
 
         if (nP == 0){
+            for (int a=0;a<GameProperties.NOMBRE_CHIFFRES; a++){
+                b[a]=10;
+            }
             for (int d=0; d<GameProperties.NOMBRE_CHIFFRES; d++) {
                 iaCombinaison[d] = 5;                       // Si c'est la première proposition l'ia propose 5555
                 }

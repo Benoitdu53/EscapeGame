@@ -65,14 +65,8 @@ public class HumanMethods implements IfDefenseur, IfAttaquant {
     @Override
     public int[] propositionCombinaison(int nP) {
         int[] userProposition;
-        int nombreProposition = nP+1;
 
         System.out.println("Veuillez saisir une combinaison à "+GameProperties.NOMBRE_CHIFFRES+" chiffres ");
-
-        System.out.println(" Votre proposition numéro : "+nombreProposition);
-        if (nombreProposition == GameProperties.NOMBRE_ESSAIE){
-            System.out.println("!! Dernière proposition !! ");
-        }
 
         userProposition = this.generateCombinaison();
 
