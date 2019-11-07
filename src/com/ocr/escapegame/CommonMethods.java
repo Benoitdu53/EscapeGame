@@ -19,7 +19,9 @@ public class CommonMethods {
         System.out.println("\t si votre chiffre est supérieur au chiffre à trouver alors '-' apparaîtra,");
         System.out.println("\t si votre chiffre est inférieur au chiffre à trouver alors '+' apparaîtra,");
         System.out.println("\t si votre chiffre est égale au chiffre à trouver alors '=' apparaîtra.");
-        System.out.println("Vous avez 4 chances ! Bon courage !!");
+        System.out.println("Nombre de chiffres dans la combinaison : "+GameProperties.NOMBRE_CHIFFRES);
+        System.out.println("Nombre d'essais : "+GameProperties.NOMBRE_ESSAIE);
+        System.out.println("Vous avez "+GameProperties.NOMBRE_ESSAIE+" chances ! Bon courage !!");
     }
     //Affiche les règles du mode Défenseur
     public static void afficheRulesDefenseurMode(){
@@ -31,10 +33,11 @@ public class CommonMethods {
         System.out.println("\t si son chiffre est supérieur au chiffre à trouver alors '-' apparaîtra,");
         System.out.println("\t si son chiffre est inférieur au chiffre à trouver alors '+' apparaîtra,");
         System.out.println("\t si son chiffre est égale au chiffre à trouver alors '=' apparaîtra.");
+        System.out.println("Nombre de chiffres dans la combinaison : "+GameProperties.NOMBRE_CHIFFRES);
+        System.out.println("Nombre d'essais : "+GameProperties.NOMBRE_ESSAIE);
         System.out.println("Amusez vous bien !!");
         System.out.println("");
-        System.out.println("");
-        System.out.println("Veuillez générez une combinaison à 4 chiffres ");
+        System.out.println("Veuillez générez une combinaison à"+GameProperties.NOMBRE_CHIFFRES+" chiffres ");
     }
     //Affiche les règles du mode Duel
     public static void afficheRulesDuelMode(){
@@ -48,21 +51,21 @@ public class CommonMethods {
         System.out.println("\t si votre chiffre est supérieur au chiffre à trouver alors '-' apparaîtra,");
         System.out.println("\t si votre chiffre est inférieur au chiffre à trouver alors '+' apparaîtra,");
         System.out.println("\t si votre chiffre est égale au chiffre à trouver alors '=' apparaîtra.");
+        System.out.println("Nombre de chiffres dans la combinaison : "+GameProperties.NOMBRE_CHIFFRES);
         System.out.println("Le premier à trouver la combinaison de l'autre à gagné !");
         System.out.println("Bonne chance !");
-        System.out.println("");
     }
 
     /**
      * Comparer les 2 combinaisons
      * @param generateCombi     Combinaison du défenseur
-     * @param propositionCombi  Combinaison de la proposition
+     * @param propositionCombi  Combinaison de l'attaquant
      * @return  Le résultat en String de la comparaison
      */
     public static String compare(int[] generateCombi, int[] propositionCombi) {
         String Results ="";
 
-        for ( int m =0; m <4 ; m++){
+        for ( int m =0; m <GameProperties.NOMBRE_CHIFFRES  ; m++){
             if (generateCombi[m] == propositionCombi[m]){
                 Results += '=';
             } else if (generateCombi[m] < propositionCombi[m]){

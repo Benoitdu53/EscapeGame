@@ -15,12 +15,12 @@ public class GameMode {
     private static final Logger logger = LogManager.getLogger(GameMode.class);
 
     private IfAttaquant attaquant;
-    private IfAttaquant attaquant1;
-    private IfAttaquant attaquant2;
+    private IfAttaquant attaquant1;     // Human Attaquant
+    private IfAttaquant attaquant2;     // Ia Attaquant
 
     private IfDefenseur defenseur;
-    private IfDefenseur defenseur1;
-    private IfDefenseur defenseur2;
+    private IfDefenseur defenseur1;     // Humaine défenseur
+    private IfDefenseur defenseur2;     // Ia défenseur
 
     private int nbMode = 0;             // Choix du mode de jeu
     private int askMode = 0;            // Choix du mode jeu en fin de partie
@@ -28,14 +28,16 @@ public class GameMode {
     private String att;
     private String def;
 
-    private boolean modeDev =false;
+    private boolean modeDev =false;     // Mode dev
+
+    Scanner sc = new Scanner(System.in);
+    private boolean reponseIsGood;
 
     public void runGameMode() {
         if (modeDev){
-            System.out.println("Mode dev");
+            System.out.println("Mode développeur");
         }
-        Scanner sc = new Scanner(System.in);
-        boolean reponseIsGood;
+
 
         do {
             if (askMode==1){
@@ -76,7 +78,7 @@ public class GameMode {
                         CommonMethods.afficheRulesChallengerMode();     // Affiche les règles du mode Challengeur
                         attaquant = new HumanMethods();
                         defenseur = new IaMethods();
-                        att = "L'utilisateur";                          // L'attanquant est l'utilisateur
+                        att = "L'utilisateur";                          // L'attaquant est l'utilisateur
                         def = "L'intelligence artificielle";            // Le défenseur est l'ia
                         Game();
                         break;
@@ -85,7 +87,7 @@ public class GameMode {
                         CommonMethods.afficheRulesDefenseurMode();      // Affiche les règles du mode défenseur
                         attaquant = new IaMethods();
                         defenseur = new HumanMethods();
-                        def = "L'utilisateur";                          // L'attanquant est l'ia
+                        def = "L'utilisateur";                          // L'attaquant est l'ia
                         att = "L'intelligence artificielle";            // Le défenseur est l'utilisateur
                         Game();
                         break;
@@ -114,22 +116,22 @@ public class GameMode {
 
         if (GameProperties.MODE_DEV){                               // On active le mode dev si modeDev = true
             System.out.println(" Mode développeur activé ");        // Du coup on affiche la combinaison du défenseur
-            System.out.println(Arrays.toString(combinaison));
+            System.out.println("Combinaison à trouver : " +Arrays.toString(combinaison)+ ".");
             System.out.println("");
         }
 
         boolean winner = false;                                     // Combinaison trouvée
         int nP = 0;                                                 // Nombre de proposition
-        int[] proposition = new int [4];                            // Tableau de la proposition faite par l'attaquant
+        int[] proposition = new int [GameProperties.NOMBRE_CHIFFRES];                            // Tableau de la proposition faite par l'attaquant
+        int nombresEgale = 0;
 
         do {
-            System.out.println();
             attaquant.recupererReponse(combinaison);                            // Récupérer la combinaison générer par le défenseur
             attaquant.recupererResults(proposition);                            // Récupérer la dernière proposition donner par l'attanquant
             proposition = attaquant.propositionCombinaison(nP);                 // Nouvelle proposition avec le nombre de proposition en paramètre
             String res = CommonMethods.compare(combinaison, proposition);       // Comparer les 2 combinaisons
             System.out.print("Proposition :" );
-            for (int a=0; a <=3; a++) {
+            for (int a=0; a <GameProperties.NOMBRE_CHIFFRES; a++) {
                 System.out.print(proposition[a]);
             }
 
@@ -138,7 +140,13 @@ public class GameMode {
 
             nP++;
 
-            if ("====".equals(res)) {
+            for (int e = 0; e < GameProperties.NOMBRE_CHIFFRES; e++){
+                if (res.charAt(e) == '=') {
+                    nombresEgale++;
+                }
+            }
+
+            if (nombresEgale == GameProperties.NOMBRE_CHIFFRES) {
                 winner = true;
             }
         }while (!winner && nP < GameProperties.NOMBRE_ESSAIE);
@@ -172,12 +180,12 @@ public class GameMode {
 
         if (GameProperties.MODE_DEV) {                                      // On active le mode dev si modeDev =true
             System.out.println(" Mode développeur activé ");                // Du coup on affiche la combinaison des défenseurs
-            System.out.println(Arrays.toString(combinaison1));
-            System.out.println(Arrays.toString(combinaison2));
+            System.out.println("Votre combinaison à trouver est : "+Arrays.toString(combinaison1)+".");
+            System.out.println("La combinaison de l'ia à trouver est : "+Arrays.toString(combinaison2)+".");
             System.out.println("");
         }
 
-            boolean humanWinner = false;                   // Si l'utilisateur à trouvé la combinaison
+        boolean humanWinner = false;                   // Si l'utilisateur à trouvé la combinaison
         boolean iaWinner = false;                      // Si l'ia à trouvée la combinaison
         int nP = 0;                                    // Nombre de propositions
         int[] proposition1 = new int [4];              // Tableau de proposition de l'utilisateur
@@ -194,13 +202,12 @@ public class GameMode {
             proposition1 = attaquant1.propositionCombinaison(nP);                   // Proposition Utilisateur
             String res1 = CommonMethods.compare(combinaison2, proposition1);        // Comparaison des 2 combinaisons
 
-            System.out.print("Proposition Humain : " );
-                for (int a=0; a <=3; a++) {
+            System.out.print("Votre proposition : " );
+                for (int a=0; a <=GameProperties.NOMBRE_CHIFFRES; a++) {
                     System.out.print(proposition1[a]);
                 }
             System.out.println(" -> Résultat : " + res1);
             System.out.println("");
-            nP++;
 
             // Si l'utilisateur trouve la réponse alors il gagne sinon l'ia propose une combinaison
                 if ("====".equals(res1)) {
@@ -218,6 +225,7 @@ public class GameMode {
                                 iaWinner = true;            // L'ia gagne
                             }
                     }
+            nP++;
         }while (!humanWinner && !iaWinner); // Tant que l'utilisateur ou l'ia ne gagne pas, continuer.
 
         /**
@@ -228,7 +236,7 @@ public class GameMode {
                 System.out.println("Félicitation !");
                 System.out.println("");
                 }else if (iaWinner){
-                    System.out.println("L'ia à trouvée votre combinaison.'");
+                    System.out.println("L'intelligence artificielle a trouvée votre combinaison.'");
                     System.out.println( "Dommage !");
                     System.out.println("");
             }
