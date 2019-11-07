@@ -13,11 +13,11 @@ public class IaMethods implements IfDefenseur, IfAttaquant {
     int[] derProposition = new int[GameProperties.NOMBRE_CHIFFRES];          // Tableau de la dernière combinaison
     int[] combinaison = new int[GameProperties.NOMBRE_CHIFFRES];             // Tableau de la combinaison du défenseur
     int[] a = new int [GameProperties.NOMBRE_CHIFFRES];                      // Tableau de l'intervalle inférieur
-    int[] b = new int [GameProperties.NOMBRE_CHIFFRES];                    // Tableau de l'intervalle supérieur
+    int[] b = new int [GameProperties.NOMBRE_CHIFFRES];                      // Tableau de l'intervalle supérieur
 
     /**
      *  Proposition d'une combinaison de l'ia
-     * @param nP Nombres de propositions
+     * @param nP Le nombres de propositions
      * @return La nouvelle proposition de l'ia
      */
     @Override
@@ -26,13 +26,12 @@ public class IaMethods implements IfDefenseur, IfAttaquant {
         System.out . print (" Appuyez sur la touche Entrée pour continuer " ) ;
         waitForKeypress.nextLine ();
 
-        if (nP == 0){
-            for (int a=0;a<GameProperties.NOMBRE_CHIFFRES; a++){
+        if (nP == 0){                                                   // Si c'est la première propisition de l'IA
+            for (int a=0;a<GameProperties.NOMBRE_CHIFFRES; a++){        // On met le chiffre supérieur de l'intervalle à 10
                 b[a]=10;
             }
-            for (int d=0; d<GameProperties.NOMBRE_CHIFFRES; d++) {
-                iaCombinaison[d] = 5;                       // Si c'est la première proposition l'ia propose 5555
-                }
+            iaCombinaison = this.generateCombinaison();                 // Et on définit aléatoirement une combinaison au hasard
+
             }else {                                                 // Sinon l'ia propose une combinaison en fonction du dernier résultat
             derProposition = recupererResults(derProposition);      // et de la combinaison générer par l'utilisateur
             combinaison =recupererReponse(combinaison);
@@ -58,8 +57,6 @@ public class IaMethods implements IfDefenseur, IfAttaquant {
     public int[] generateCombinaison() {
         int[] IaGenerate = new int[GameProperties.NOMBRE_CHIFFRES];
         // L'Ia définit sa combinaison
-        System.out.println("");
-        System.out.println("L'Intelligence artificielle définit aléatoirement une combinaison...");
         for (int i = 0; i < GameProperties.NOMBRE_CHIFFRES; i++) {
             int numCombi = (int) (Math.random() * 10);
             IaGenerate[i] = numCombi;

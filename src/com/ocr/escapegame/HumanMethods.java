@@ -6,11 +6,13 @@ import org.apache.logging.log4j.Logger;
 import java.util.Scanner;
 
 public class HumanMethods implements IfDefenseur, IfAttaquant {
-    private static final Logger logger = LogManager.getLogger(HumanMethods.class);
+
     Scanner sc = new Scanner(System.in);
 
-    private int[] derProposition = new int[GameProperties.NOMBRE_CHIFFRES];          // Tableau de la dernière proposition
-    int[] combinaison = new int[GameProperties.NOMBRE_CHIFFRES];                     // Tableau de la combinaison générée par le défenseur
+    private static final Logger logger = LogManager.getLogger(HumanMethods.class);
+
+    private int[] derProposition = new int[GameProperties.NOMBRE_CHIFFRES];                 // Tableau de la dernière proposition
+    public int[] combinaison = new int[GameProperties.NOMBRE_CHIFFRES];                     // Tableau de la combinaison générée par le défenseur
 
     /**
      * L'humain génère une combinaison en tant que défenseur
@@ -20,12 +22,13 @@ public class HumanMethods implements IfDefenseur, IfAttaquant {
     public int[] generateCombinaison() {
         String pU;                                      // Saisie utilisateur
         boolean Ucombi;                                 // Pour valider la bonne saisie de l'utilisateur
-        int temp [] = new int [GameProperties.NOMBRE_CHIFFRES];
-        int[] userCombinaison = new int[GameProperties.NOMBRE_CHIFFRES];             // Tableau de la combinaison générée ou proposé
-        int nombreChiffres = GameProperties.NOMBRE_CHIFFRES - 1;
+        int[] temp = new int [GameProperties.NOMBRE_CHIFFRES];                 // Tableau qui permet de le bon ordre des chiffres d'une combinaison
+        int[] userCombinaison = new int[GameProperties.NOMBRE_CHIFFRES];        // Tableau de la combinaison générée ou proposée
+        int nombreChiffres = GameProperties.NOMBRE_CHIFFRES - 1;                // Variable utile pour le bon ordre les chiffres d'une combinaison
 
         do {
             try {
+                // On récupère la saisie utilisateur
                 pU = sc.nextLine();
                 // On la convertie en int
                 int userCombi = Integer.parseInt(pU);
@@ -35,14 +38,13 @@ public class HumanMethods implements IfDefenseur, IfAttaquant {
 
                 if (lastChiffres == GameProperties.NOMBRE_CHIFFRES) {
 
-                    for (int a=0;a < GameProperties.NOMBRE_CHIFFRES; a++){
+                    for (int a=0;a < GameProperties.NOMBRE_CHIFFRES; a++){      // On récupère chaque chiffre via le modulo
                         temp [a] = userCombi%10;
                         userCombi=userCombi/10;
 
-                        userCombinaison [nombreChiffres] = temp [a];
+                        userCombinaison [nombreChiffres] = temp [a];            // On inverse pour que les chiffres soient dans le bon ordre
                         nombreChiffres--;
                     }
-
                     Ucombi = true;
                 } else {
                     System.out.println("Vous n'avez pas saisie un nombres à "+GameProperties.NOMBRE_CHIFFRES+" chiffres");

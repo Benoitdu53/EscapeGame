@@ -22,13 +22,15 @@ public class CommonMethods {
         System.out.println("Nombre de chiffres dans la combinaison : "+GameProperties.NOMBRE_CHIFFRES);
         System.out.println("Nombre d'essais : "+GameProperties.NOMBRE_ESSAIE);
         System.out.println("Vous avez "+GameProperties.NOMBRE_ESSAIE+" chances ! Bon courage !!");
+        System.out.println("");
+        System.out.println("L'Intelligence artificielle définit aléatoirement une combinaison...");
     }
     //Affiche les règles du mode Défenseur
     public static void afficheRulesDefenseurMode(){
         System.out.println("Vous avez choisi comme mode de jeu : Défenseur");
         System.out.println("");
         System.out.println("Principe du jeu en mode Défenseur :");
-        System.out.println("Vous devez choisir la combinaison à X chiffres et l'intelligence artificielle à 4 chances de la trouvée.");
+        System.out.println("Vous devez choisir la combinaison à X chiffres et l'intelligence artificielle à "+GameProperties.NOMBRE_ESSAIE+" chances de la trouvée.");
         System.out.println("A chaque proposition,");
         System.out.println("\t si son chiffre est supérieur au chiffre à trouver alors '-' apparaîtra,");
         System.out.println("\t si son chiffre est inférieur au chiffre à trouver alors '+' apparaîtra,");
@@ -37,7 +39,7 @@ public class CommonMethods {
         System.out.println("Nombre d'essais : "+GameProperties.NOMBRE_ESSAIE);
         System.out.println("Amusez vous bien !!");
         System.out.println("");
-        System.out.println("Veuillez générez une combinaison à"+GameProperties.NOMBRE_CHIFFRES+" chiffres ");
+        System.out.println("Veuillez générez une combinaison à "+GameProperties.NOMBRE_CHIFFRES+" chiffres ");
     }
     //Affiche les règles du mode Duel
     public static void afficheRulesDuelMode(){
@@ -63,20 +65,20 @@ public class CommonMethods {
      * @return  Le résultat en String de la comparaison
      */
     public static String compare(int[] generateCombi, int[] propositionCombi) {
-        String Results ="";
+        StringBuilder Results = new StringBuilder();
 
         for ( int m =0; m <GameProperties.NOMBRE_CHIFFRES  ; m++){
             if (generateCombi[m] == propositionCombi[m]){
-                Results += '=';
+                Results.append('=');
             } else if (generateCombi[m] < propositionCombi[m]){
-                Results += '-';
+                Results.append('-');
             }
             else if (generateCombi[m] > propositionCombi[m]){
-                Results += '+';
+                Results.append('+');
             }
         }
 
-        return Results;
+        return Results.toString();
     }
 
     /**
