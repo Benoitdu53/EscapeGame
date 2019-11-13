@@ -28,7 +28,7 @@ public class GameMode {
     private String att;                 // Variable qui indique qui est l'attaquant
     private String def;                 // Variable qui indique qui est le défenseur
 
-    private boolean modeDev =false;     // Variable qui indique sir le Mode dev est activé
+    private boolean modeDev;     // Variable qui indique sir le Mode dev est activé
     private boolean reponseIsGood;      // Variable qui indique qui si la l'utilisateur à bien saisi le mode de jeu
 
     Scanner sc = new Scanner(System.in);
@@ -39,10 +39,12 @@ public class GameMode {
 
     /**
      * Lancement de l'application
+     * @param modeDev Si le mode développeur est activé
      */
-    public void runGameMode() {
-        if (modeDev){
-            System.out.println("Mode développeur");
+    public void runGameMode(boolean modeDev) {
+
+        if (GameProperties.MODE_DEV || modeDev){
+            System.out.println("----- MODE DEVELOPPEUR -----");
         }
 
         do {
@@ -187,7 +189,7 @@ public class GameMode {
             }
 
         askMode = CommonMethods.AskGame();                  // On pose la question pour une nouvelle partie
-        runGameMode();
+        runGameMode(modeDev);
     }
 
 
@@ -291,7 +293,7 @@ public class GameMode {
             }
 
         askMode = CommonMethods.AskGame();      // Poser la question sur une nouvelle partie
-        runGameMode();                          // Retourner au menu
+        runGameMode(modeDev);                   // Retourner au menu
     }
 
 }
