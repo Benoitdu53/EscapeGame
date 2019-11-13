@@ -2,9 +2,6 @@
   <artifact type="jar" name="EscapeGame:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/EscapeGame_jar</output-path>
     <root id="archive" name="EscapeGame.jar">
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/EscapeGameP3/META-INF/MANIFEST.MF" />
-      </element>
       <element id="module-output" name="EscapeGame" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/log4j-api-2.12.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/log4j-core-2.12.1.jar" path-in-jar="/" />
