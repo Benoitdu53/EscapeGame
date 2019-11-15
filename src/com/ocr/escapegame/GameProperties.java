@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import static com.ocr.escapegame.Main.modeDevargs;
+
 public class GameProperties {
 
     private static final Logger logger = LogManager.getLogger(GameProperties.class);
@@ -33,6 +35,10 @@ public class GameProperties {
                 nombreChiffres = Integer.parseInt(prop.getProperty("nombre.chiffre.combinaison"));
                 nombreEssaie = Integer.parseInt(prop.getProperty("nombre.essaie"));
                 modeDev = Boolean.parseBoolean(prop.getProperty("mode.dev"));
+
+                if (modeDevargs){
+                    modeDev =true;
+                }
 
 
             } catch (final IOException ex) {

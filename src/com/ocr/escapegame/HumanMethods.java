@@ -97,4 +97,15 @@ public class HumanMethods implements IfDefenseur, IfAttaquant {
         return combinaison;
     }
 
+    /**
+     * On récupère l'identité de l'attaquant
+     * @param roleAtt Identité de l'attaquant
+     * @return  L'identité de l'attaquant
+     */
+    @Override
+    public String roleAttaquant(String roleAtt) {
+        roleAtt = "Utilisateur";
+        return roleAtt;
+    }
+
 }

@@ -8,4 +8,5 @@ public interface IfAttaquant {
     int[] propositionCombinaison(int nP);
     int[] recupererResults(int[] proposition); // Récupérer la dernière proposition de l'attaquant
     int[] recupererReponse(int[] combinaison); // Récupérer la combinaison du défenseur
+    String roleAttaquant (String roleAtt);     // Récupèrer l'identité de l'attaquant
 }

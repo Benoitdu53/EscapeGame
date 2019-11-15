@@ -14,14 +14,13 @@ public class CommonMethods {
         System.out.println("Vous avez choisi comme mode de jeu : Challenger");
         System.out.println("");
         System.out.println("Principe du jeu en mode Challenger :");
-        System.out.println("Vous devez trouver la combinaison à X chiffres choisis par l'intelligence artificielle.");
+        System.out.println("Vous devez trouver la combinaison à X chiffres choisis par l'intelligence artificielle et vous avez X chances.");
         System.out.println("A chaque proposition,");
         System.out.println("\t si votre chiffre est supérieur au chiffre à trouver alors '-' apparaîtra,");
         System.out.println("\t si votre chiffre est inférieur au chiffre à trouver alors '+' apparaîtra,");
         System.out.println("\t si votre chiffre est égale au chiffre à trouver alors '=' apparaîtra.");
         System.out.println("Nombre de chiffres dans la combinaison : "+GameProperties.NOMBRE_CHIFFRES);
         System.out.println("Nombre d'essais : "+GameProperties.NOMBRE_ESSAIE);
-        System.out.println("Vous avez "+GameProperties.NOMBRE_ESSAIE+" chances ! Bon courage !!");
         System.out.println("");
         System.out.println("L'Intelligence artificielle définit aléatoirement une combinaison...");
     }
@@ -30,7 +29,7 @@ public class CommonMethods {
         System.out.println("Vous avez choisi comme mode de jeu : Défenseur");
         System.out.println("");
         System.out.println("Principe du jeu en mode Défenseur :");
-        System.out.println("Vous devez choisir la combinaison à X chiffres et l'intelligence artificielle à "+GameProperties.NOMBRE_ESSAIE+" chances de la trouvée.");
+        System.out.println("Vous devez choisir la combinaison à X chiffres et l'intelligence artificielle à X chances de la trouvée.");
         System.out.println("A chaque proposition,");
         System.out.println("\t si son chiffre est supérieur au chiffre à trouver alors '-' apparaîtra,");
         System.out.println("\t si son chiffre est inférieur au chiffre à trouver alors '+' apparaîtra,");
